@@ -1,6 +1,5 @@
 const PORT = process.env.PORT || 3000;
 
-var config = require('./config.json')
 // Serveri luodaan Express kehystä käyttäen (Ensin asenna 'npm install express --save')
 var express = require("express");
 // Dataa voidaan hakea verkosta Axios-kirjastoa käyttäen (Ensin asenna 'npm install axios --save')
@@ -26,7 +25,7 @@ app.use(express.static("./public"));
 app.locals.pretty = true;
 
 // Script tietokantaan
-const uri = process.env.CONNECTIONSTRING || config.connectionstring;
+const uri = process.env.CONNECTIONSTRING || require('./config.json').config.connectionstring;
 
 // Yhdistetään tietokantaan
 mongoose.connect(uri, {useNewUrlParser:true, useUnifiedTopology:true});
