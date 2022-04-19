@@ -5,7 +5,7 @@
   "engines": {
     "node": "16.13.2"
   },
-  "main": "index.js",
+  "main": "project3.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node project3.js"
