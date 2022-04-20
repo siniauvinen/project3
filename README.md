@@ -19,14 +19,14 @@ Back-end can be tested using Postman. Following routes work.
 
 When creating or updating a document the structure of the schema is following:
 
-{ <br />
-  "address": { <br />
-    "street": "String", <br />
-    "zipcode": Number, <br />
+{ 
+  "address": { 
+    "street": "String", 
+    "zipcode": Number,
   }, <br />
-  "borough": "String", <br />
-  "cuisine": "String", <br />
-  "name": "String" <br />
+  "borough": "String",
+  "cuisine": "String",
+  "name": "String"
 }
 
 ### Technologies
