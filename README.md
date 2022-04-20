@@ -11,11 +11,23 @@ Restaurant API is a school project to learn build API's using Mongoose and Node.
 For now, this is only back-end.
 
 Back-end can be tested using Postman. Following routes work.
-* xxx/api/getall
-* xxx/api/:id
-* xxx/api/add
-* xxx/api/update/:id
-* xxx/api/delete/:id
+* https://ravintolaapi.herokuapp.com/api/getall = return all documents in collection (data length is limited to 10 objects)
+* https://ravintolaapi.herokuapp.com/api/:id = return one item with given id
+* https://ravintolaapi.herokuapp.com/api/add = create a new document in the collection
+* https://ravintolaapi.herokuapp.com/api/update/:id = update the document with the given id
+* https://ravintolaapi.herokuapp.com/api/delete/:id = delete the item with the given id
+
+When creating or updating a document the structure of the schema is following:
+
+{
+  "address": {
+    "street": "String",
+    "zipcode": Number,
+  },
+  "borough": "String",
+  "cuisine": "String",
+  "name": "String"
+}
 
 ### Technologies
 ***
