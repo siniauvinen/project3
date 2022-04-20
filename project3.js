@@ -27,7 +27,6 @@ app.locals.pretty = true;
 
 // Script tietokantaan
 const uri = process.env.CONNECTIONSTRING 
-// || require('./config.json').config.connectionstring;
 
 // Yhdistetään tietokantaan
 mongoose.connect(uri, {useNewUrlParser:true, useUnifiedTopology:true});
