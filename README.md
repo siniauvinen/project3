@@ -33,13 +33,9 @@ When creating or updating a document the structure of the schema is following:
 ***
 A list of technologies that were used to create the project.
 * Visual Studio Code 1.61.1
-* HTML 5
 * Java Script
-* CSS
-* Bootstrap 4.0.0
 * Node.js
 * Express
-* EJS
 * MongoDB
 * Mongoose
 
