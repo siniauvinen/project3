@@ -70,7 +70,7 @@ app.get("/api/:id", function(req, res) {
 
 // Lisätään tietokantan uusi olio
 app.post("/api/add", function(req, res) {
-    var newUser = new Restaurant ({
+    var newRestaurant = new Restaurant ({
       address: {
         street: req.body.address.street,
         zipcode: req.body.address.zipcode
@@ -80,9 +80,9 @@ app.post("/api/add", function(req, res) {
       name: req.body.name
     })
 
-    newUser
+    newRestaurant
         .save()
-    res.send(newUser)
+    res.send(newRestaurant)
 })
 
 // Muokataan tietokannassa olevaa oliota antamalla ID
