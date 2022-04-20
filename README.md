@@ -19,14 +19,14 @@ Back-end can be tested using Postman. Following routes work.
 
 When creating or updating a document the structure of the schema is following:
 
-{
-  "address": {
-    "street": "String",
-    "zipcode": Number,
-  },
-  "borough": "String",
-  "cuisine": "String",
-  "name": "String"
+{ <br />
+  "address": { <br />
+    "street": "String", <br />
+    "zipcode": Number, <br />
+  }, <br />
+  "borough": "String", <br />
+  "cuisine": "String", <br />
+  "name": "String" <br />
 }
 
 ### Technologies
@@ -45,4 +45,4 @@ A list of technologies that were used to create the project.
 
 ### Installation
 ***
-No special requirements. Restaurant API can be found from xxx
+No special requirements. Restaurant API can be found from https://ravintolaapi.herokuapp.com/api/getall
