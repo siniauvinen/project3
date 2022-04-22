@@ -1,4 +1,6 @@
 const PORT = process.env.PORT || 3000;
+// CORS kiesrtää tietoturvarajoitukset (ensin asenna 'npm install cors --save')
+var cors = require('cors')
 // Env-tiedoston luonti db salasanan ja käyttäjätunnuksen salaamiseksi (ensin asenna 'npm install dotenv --save')
 require('dotenv').config();
 // Serveri luodaan Express kehystä käyttäen (Ensin asenna 'npm install express --save')
@@ -9,8 +11,10 @@ var axios = require("axios");
 const MongoClient = require("mongodb").MongoClient;
 // Mongoose kehyksen tuonti (Ensin asenna 'npm install mongoose --save)
 var mongoose = require("mongoose")
+// File system reader
 var fs = require("fs");
 var app = express();
+app.use(cors())
 // Otetaan EJS käyttöön (Ensin asenna 'npm install ejs --save')
 app.set("view engine", "ejs");
 // Tuodaan bodyParser käyttöön jotta voidaan lukea lomakedataa
