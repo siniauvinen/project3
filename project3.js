@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 // CORS kiesrtää tietoturvarajoitukset (ensin asenna 'npm install cors --save')
 var cors = require('cors')
 // Env-tiedoston luonti db salasanan ja käyttäjätunnuksen salaamiseksi (ensin asenna 'npm install dotenv --save')
@@ -46,19 +46,78 @@ const Restaurant = mongoose.model("Restaurant", {
 }, 'restaurants');
 
 // Tulostetaan tietokannan kaikki oliot
+// app.get("/api/getall", function(req, res) {
+//     Restaurant.find({}, null, {limit:20}, function(err, results) {
+//         //if err then return the fault code to browser
+//     if(err) {
+//         res.status(500).json("Fault in data search");
+//       } else {
+//         // Return the results as JSON-objects to browser
+//         res.status(200).json(results);      
+//       };  
+//     });
+// });
+
+// Mahdollistaa tietokannasta parametreillä nimi, asuinalue, ruokalaji
 app.get("/api/getall", function(req, res) {
-    Restaurant.find({}, null, {limit:10}, function(err, results) {
-        //if err then return the fault code to browser
-    if(err) {
-        res.status(500).json("Fault in data search");
-      } else {
-        // Return the results as JSON-objects to browser
-        res.status(200).json(results);      
-      };  
-    });
+  var borough = req.query.borough
+  var cuisine = req.query.cuisine
+  var filter = {}
+  if (borough != null) filter.borough = borough
+  if (cuisine != null) filter.cuisine = cuisine
+
+  Restaurant.find(filter, null, {limit:150}, function(err, results) {
+      //if err then return the fault code to browser
+  if(err) {
+      res.status(500).json("Fault in data search");
+    } else {
+      // Return the results as JSON-objects to browser
+      res.status(200).json(results);      
+    };  
+  });
 });
 
-// Tulostetaan tietokannan olio ID:n perusteella
+// Hakee APIsta kaikki ruokalajit
+app.get("/api/cuisines", function(req, res) {
+  Restaurant.find({}, null, function(err, results) {
+      //if err then return the fault code to browser
+  if(err) {
+      res.status(500).json("Fault in data search");
+    } else {
+      // Return the results as JSON-objects to browser
+      var cuisines = [];
+      for (var i = 0; i < results.length; i++){
+        if (cuisines.includes(results[i].cuisine)){
+          continue;
+        }
+        cuisines.push(results[i].cuisine)
+      }
+      res.status(200).json(cuisines);      
+    };  
+  });
+});
+
+// Hakee APIsta kaikki asuinalueet
+app.get("/api/boroughs", function(req, res) {
+  Restaurant.find({}, null, function(err, results) {
+      //if err then return the fault code to browser
+  if(err) {
+      res.status(500).json("Fault in data search");
+    } else {
+      // Return the results as JSON-objects to browser
+      var boroughs = [];
+      for (var i = 0; i < results.length; i++){
+        if (boroughs.includes(results[i].borough)){
+          continue;
+        }
+        boroughs.push(results[i].borough)
+      }
+      res.status(200).json(boroughs);      
+    };  
+  });
+});
+
+// Haetaan tietokannan olio ID:n perusteella
 app.get("/api/:id", function(req, res) {
   var id = req.params.id;
   Restaurant.findById(id, function(err, results) {
@@ -76,8 +135,7 @@ app.get("/api/:id", function(req, res) {
 app.post("/api/add", function(req, res) {
     var newRestaurant = new Restaurant ({
       address: {
-        street: req.body.address.street,
-        zipcode: req.body.address.zipcode
+        street: req.body.address.street
       },
       borough: req.body.borough,
       cuisine: req.body.cuisine,
@@ -90,12 +148,11 @@ app.post("/api/add", function(req, res) {
 })
 
 // Muokataan tietokannassa olevaa oliota antamalla ID
-app.put("/api/modify/:id", function(req, res) {
+app.put("/api/update/:id", function(req, res) {
     var id = req.params.id;
     var newdata = { 
       address: {
-      street: req.body.address.street,
-      zipcode: req.body.address.zipcode
+      street: req.body.address.street
       },
       borough: req.body.borough,
       cuisine: req.body.cuisine,
@@ -113,7 +170,7 @@ app.put("/api/modify/:id", function(req, res) {
   });
 
   // Poistetaan tietokannan olio ID:n perusteella
-  app.delete("/api/remove/:id", function(req, res) {
+  app.delete("/api/delete/:id", function(req, res) {
     // Take the id for the delete operation
     var id = req.params.id;
   

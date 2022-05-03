@@ -16,6 +16,8 @@ Back-end can be tested using Postman. Following routes work.
 * https://ravintolaapi.herokuapp.com/api/add = create a new document in the collection
 * https://ravintolaapi.herokuapp.com/api/update/:id = update the document with the given id
 * https://ravintolaapi.herokuapp.com/api/delete/:id = delete the item with the given id
+* https://ravintolaapi.herokuapp.com/api/boroughs = list of all possible boroughs
+* https://ravintolaapi.herokuapp.com/api/cuisines = list of all possible cuisines
 
 When creating or updating a document the structure of the schema is following:
 
