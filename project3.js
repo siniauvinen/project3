@@ -77,42 +77,29 @@ app.get("/api/getall", function(req, res) {
   });
 });
 
+
 // Hakee APIsta kaikki ruokalajit
 app.get("/api/cuisines", function(req, res) {
-  Restaurant.find({}, null, function(err, results) {
+  Restaurant.distinct('cuisine',{},function(err, results) {
       //if err then return the fault code to browser
-  if(err) {
-      res.status(500).json("Fault in data search");
-    } else {
-      // Return the results as JSON-objects to browser
-      var cuisines = [];
-      for (var i = 0; i < results.length; i++){
-        if (cuisines.includes(results[i].cuisine)){
-          continue;
-        }
-        cuisines.push(results[i].cuisine)
-      }
-      res.status(200).json(cuisines);      
-    };  
+      if(err) {
+        res.status(500).json("Fault in data search");
+      } else {
+        // Return the results as JSON-objects to browser
+        res.status(200).json(results);      
+      };  
   });
 });
 
 // Hakee APIsta kaikki asuinalueet
 app.get("/api/boroughs", function(req, res) {
-  Restaurant.find({}, null, function(err, results) {
+  Restaurant.distinct('borough', {}, function(err, results) {
       //if err then return the fault code to browser
   if(err) {
       res.status(500).json("Fault in data search");
     } else {
       // Return the results as JSON-objects to browser
-      var boroughs = [];
-      for (var i = 0; i < results.length; i++){
-        if (boroughs.includes(results[i].borough)){
-          continue;
-        }
-        boroughs.push(results[i].borough)
-      }
-      res.status(200).json(boroughs);      
+      res.status(200).json(results);      
     };  
   });
 });
